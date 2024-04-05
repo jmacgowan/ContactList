@@ -1,7 +1,8 @@
 import React from "react"
 
-const ContantList = ({contacts}) => {
+const ContactList = ({contacts}) => {
     return <div>
+        <head>Contacts</head>
         <table>
             <thead>
                 <tr>
@@ -13,7 +14,7 @@ const ContantList = ({contacts}) => {
             </thead>
             <tbody>
                 {contacts.map((contact) => (
-                    <tr key = {contactt.id}>
+                    <tr key = {contact.id}>
                         <td>{contact.firstName}</td>
                         <td>{contact.lastName}</td>
                         <td>{contact.email}</td>
@@ -28,4 +29,4 @@ const ContantList = ({contacts}) => {
     </div>
 }
 
-export default ContantList
+export default ContactList

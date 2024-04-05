@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react'
-import ContantList from './ContactList'
+import ContactList from './ContactList'
 import './App.css'
+import ContactForm from './ContactForm'
 
 function App() {
   const [contacts, setContacts] = useState([])
@@ -12,9 +13,13 @@ function App() {
     const response = await fetch("http://127.0.0.1:5000/contacts")
     const data = await response.json()
     setContacts(data.contacts)
+    console.log(data.contacts)
   }
   return (
-    <ContantList contacts={contacts} />
+  <>    
+    <ContactList contacts={contacts} />
+    <ContactForm />
+  </>
   )
 }
 
