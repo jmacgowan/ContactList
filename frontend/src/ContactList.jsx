@@ -27,3 +27,5 @@ const ContantList = ({contacts}) => {
         </table>
     </div>
 }
+
+export default ContantList

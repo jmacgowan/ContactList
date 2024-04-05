@@ -1,4 +1,5 @@
 import { useState, useEffect} from 'react'
+import ContantList from './ContactList'
 import './App.css'
 
 function App() {
@@ -13,9 +14,7 @@ function App() {
     setContacts(data.contacts)
   }
   return (
-    <>
-
-    </>
+    <ContantList contacts={contacts} />
   )
 }
 
