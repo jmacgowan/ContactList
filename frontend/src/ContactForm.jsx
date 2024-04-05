@@ -12,7 +12,7 @@ const ContactForm = ({}) => {
             lastName,
             email
         }
-        const url = "https://127.0.0.1:5000/create_contact"
+        const url = "http://127.0.0.1:5000/create_contact"
         const options = {
             method:"POST",
             headers: {
@@ -25,7 +25,7 @@ const ContactForm = ({}) => {
             const message = await response.json()
             alert(data.message)
         } else {
-
+           
         }
     }
     

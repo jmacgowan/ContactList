@@ -10,6 +10,7 @@ def get_contacts():
 
 @app.route("/create_contact", methods = ["POST"])
 def add_contacts():
+    print("Haha")
     first_name = request.json.get("firstName")
     last_name = request.json.get("lastName")
     email = request.json.get("email")
