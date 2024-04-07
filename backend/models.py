@@ -1,13 +1,14 @@
 from config import db
-from uuid import uuid4
 
 class Contact(db.Model):
+    __tablename__ = 'contacts'  
+
     """Represents a contact in the database."""
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), unique=False, nullable=False)
     last_name = db.Column(db.String(50), unique=False, nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(100), unique=False, nullable=False)
 
     def to_json(self):
         """
@@ -23,14 +24,25 @@ class Contact(db.Model):
             "email": self.email
         }
 
-def get_uuid():
-    return uuid4.hex
+# Define the User model
+class User(db.Model):
+    """Represents a user in the database."""
+    __tablename__ = 'users'  # Define the table name explicitly
 
-class Users(db.model):
-    __tablename__ = "users"
-    id = db.Column(db.String(32), primary_key = True, unique = True, default = get_uuid)
-    email = db.Column(db.String(128), unique = True)
-    password = db.Column(db.Text, nullablle = False)
+    
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
 
+    def to_json(self):
+        """
+        Convert the User object to a JSON dictionary.
 
-
+        Returns:
+            dict: A dictionary representation of the User object.
+        """
+        return {
+            "id": self.id,
+            "email": self.email
+        }
+    

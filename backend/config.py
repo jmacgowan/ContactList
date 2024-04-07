@@ -8,10 +8,7 @@ app = Flask(__name__)
 # Enable Cross-Origin Resource Sharing (CORS) for the Flask app
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///contacts.db"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)

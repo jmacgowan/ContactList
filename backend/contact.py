@@ -13,13 +13,14 @@ def get_contacts():
     """
     # Retrieve all contacts from the database
     contacts = Contact.query.all()
+
     # Convert contacts to JSON format
-    json_contacts = list(map(lambda x: x.to_json(), contacts))
+    json_contacts = [contact.to_json() for contact in contacts]
     return jsonify({"contacts": json_contacts})
 
 # Route to create a new contact in the database
 @app.route("/create_contact", methods=["POST"])
-def add_contacts():
+def add_contact():
     """
     Add a new contact to the database.
 
@@ -27,17 +28,18 @@ def add_contacts():
         jsonify: JSON response indicating the success or failure of the operation.
     """
     # Extract first name, last name, and email from request data
-    first_name = request.json.get("firstName")
-    last_name = request.json.get("lastName")
-    email = request.json.get("email")
+    data = request.json
+    first_name = data.get("firstName")
+    last_name = data.get("lastName")
+    email = data.get("email")
 
     # Validate input data
     if not first_name or not last_name or not email:
         return jsonify({'message': 'Input a correctly formatted first name, last name, and email'}), 400
 
-    # Create a new contact object
-    new_contact = Contact(first_name=first_name, last_name=last_name, email=email)
     try:
+        # Create a new contact object
+        new_contact = Contact(first_name=first_name, last_name=last_name, email=email)
         # Add the new contact to the database
         db.session.add(new_contact)
         db.session.commit()
@@ -47,7 +49,7 @@ def add_contacts():
 
 # Route to update an existing contact in the database
 @app.route("/update_contact/<int:id>", methods=["PATCH"])
-def update_contacts(id):
+def update_contact(id):
     """
     Update an existing contact in the database.
 
@@ -93,13 +95,13 @@ def delete_contact(id):
     # Retrieve the contact to be deleted from the database
     contact = Contact.query.get(id)
     if not contact:
-        return jsonify({'Message': 'User not found'}), 404
+        return jsonify({'Message': 'Contact not found'}), 404
 
     # Delete the contact from the database
     db.session.delete(contact)
     db.session.commit()
 
-    return jsonify({'message': 'User deleted'}), 200
+    return jsonify({'message': 'Contact deleted'}), 200
 
 # Entry point to run the Flask application
 if __name__ == "__main__":
