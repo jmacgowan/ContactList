@@ -15,22 +15,21 @@ def add_contacts():
     email = request.json.get("email")
 
     if not first_name or not last_name or not email:
-        print("huh")
-        return jsonify({"message": "Input a correctly formatted first name, last name, and email"}), 400
+        return jsonify({'message': 'Input a correctly formatted first name, last name, and email'}), 400
 
     new_contact = Contact(first_name=first_name, last_name=last_name, email=email)
     try:
         db.session.add(new_contact)
         db.session.commit()
-        return jsonify({"message": "Contact added successfully"}), 200
+        return jsonify({'message': 'Contact added successfully'}), 200
     except Exception as e:
-        return jsonify({"message": str(e)}), 400
+        return jsonify({'message': str(e)}), 400
 
 @app.route("/update_contact/<int:id>", methods=["PATCH"])
 def update_contacts(id):
     contact = Contact.query.get(id)
     if not contact:
-        return (jsonify({"message" : "Input an existing record to update"},
+        return (jsonify({'message' : 'Input an existing record to update'},
         400))
 
     data = request.json
@@ -40,18 +39,18 @@ def update_contacts(id):
     
     db.session.commit()
 
-    return jsonify({"message" : "usr updated"}, 200)
+    return jsonify({'message' : 'usr updated'}, 200)
 
 @app.route("/delete_contact/<int:id>", methods=["DELETE"])
 def delete_contact(id):
     contact = Contact.query.get(id)
     if not contact:
-        return jsonify({"Message": "User not found"}), 404
+        return jsonify({'Message': 'User not found'}), 404
 
     db.session.delete(contact)
     db.session.commit()
 
-    return jsonify({"message": "User deleted"}), 200
+    return jsonify({'message': 'User deleted'}), 200
     
 if __name__ == "__main__":
     with app.app_context():
