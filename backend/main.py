@@ -31,11 +31,19 @@ def update_contacts(id):
     if not contact:
         return (jsonify({'message' : 'Input an existing record to update'},
         400))
-
     data = request.json
-    contact.first_name = data.get("firstName", contact.first_name)
-    contact.last_name = data.get("lastName", contact.last_name)
-    contact.email = data.get("email", contact.email)
+
+    f_name = data.get("firstName", contact.first_name)
+    print(f_name)
+    l_name = data.get("lastName", contact.last_name)
+    new_email = data.get("email", contact.email)
+    
+    if not f_name or not l_name or not new_email:
+        return jsonify({'message': 'Input a correctly formatted first name, last name, and email'}), 400
+    
+    contact.first_name = f_name
+    contact.last_name = l_name
+    contact.email = new_email
     
     db.session.commit()
 
