@@ -1,2 +1,4 @@
-from Flask import flask
-from models import Users, db
+from flask import jsonify, request
+from config import app, db
+from models import User 
+
