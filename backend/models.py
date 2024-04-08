@@ -1,5 +1,4 @@
 from config import db
-from uuid import uuid4
 
 class Contact(db.Model):
     __tablename__ = 'contacts'  
@@ -22,30 +21,5 @@ class Contact(db.Model):
             "id": self.id,
             "firstName": self.first_name,
             "lastName": self.last_name,
-            "email": self.email
-        }
-    
-def get_uuid():
-    return uuid4.hex
-    
-# Define the User model
-class User(db.Model):
-    """Represents a user in the database."""
-    __tablename__ = 'users'  # Define the table name explicitly
-
-    
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False, default=get_uuid)
-
-    def to_json(self):
-        """
-        Convert the User object to a JSON dictionary.
-
-        Returns:
-            dict: A dictionary representation of the User object.
-        """
-        return {
-            "id": self.id,
             "email": self.email
         }
